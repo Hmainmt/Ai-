@@ -1,0 +1,412 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(145deg, #f0f4f8 0%, #e8edf2 100%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s ease;
+}
+
+/* 深色模式 - 莫奈暗色 */
+body.dark {
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+}
+
+/* 毛玻璃效果 */
+.glass {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+body.dark .glass {
+    background: rgba(26, 26, 46, 0.7);
+}
+
+/* 头部 */
+.header {
+    padding: 20px 20px 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+}
+.header-title h1 {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.header-title p {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+    font-weight: 500;
+}
+.header-actions {
+    display: flex;
+    gap: 4px;
+}
+.icon-btn {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 40px;
+    transition: all 0.2s ease;
+}
+body.dark .icon-btn {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ddd;
+}
+.icon-btn:active {
+    transform: scale(0.94);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* 模型切换 - 胶囊式 */
+.model-switch {
+    padding: 8px 20px 20px 20px;
+    display: flex;
+    gap: 12px;
+    background: transparent;
+}
+.model-option {
+    flex: 1;
+    padding: 12px 0;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+body.dark .model-option {
+    background: rgba(255, 255, 255, 0.08);
+    color: #aaa;
+}
+.model-option.active {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+.model-option:active {
+    transform: scale(0.96);
+}
+
+/* 聊天区域 */
+.chat-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 消息行 */
+.message {
+    display: flex;
+    width: 100%;
+    animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.user-message {
+    justify-content: flex-end;
+}
+.ai-message {
+    justify-content: flex-start;
+}
+
+.message-content {
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 头像 */
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    backdrop-filter: blur(10px);
+}
+.user-message .avatar {
+    order: 2;
+    margin-left: 12px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+.ai-message .avatar {
+    margin-right: 12px;
+    background: rgba(255, 255, 255, 0.6);
+}
+body.dark .ai-message .avatar {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* 气泡 - 莫奈风格 */
+.bubble {
+    padding: 12px 18px;
+    font-size: 15px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+.user-bubble {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 24px 24px 4px 24px;
+}
+.ai-bubble {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    color: #1a1a2e;
+    border-radius: 24px 24px 24px 4px;
+}
+body.dark .ai-bubble {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+}
+
+.message-meta {
+    font-size: 10px;
+    color: #aaa;
+    margin-top: 6px;
+}
+.user-message .message-meta {
+    text-align: right;
+}
+.copy-btn {
+    background: transparent;
+    border: none;
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 6px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: fit-content;
+    transition: 0.2s;
+}
+.copy-btn:active {
+    background: rgba(0,0,0,0.05);
+}
+
+/* 欢迎界面 */
+.welcome {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 40px 20px;
+    text-align: center;
+}
+.welcome-icon {
+    font-size: 64px;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.1));
+}
+.welcome-text {
+    font-size: 26px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.welcome-desc {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.6;
+}
+
+/* 加载动画 */
+.loading {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+body.dark .loading {
+    background: rgba(255, 255, 255, 0.08);
+}
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #667eea;
+    border-radius: 50%;
+    animation: pulse 1.2s infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes pulse {
+    0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
+    30% { opacity: 1; transform: scale(1.2); }
+}
+
+/* 输入区域 - 毛玻璃 */
+.input-bar {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    padding: 12px 20px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0));
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.3);
+}
+body.dark .input-bar {
+    background: rgba(26, 26, 46, 0.7);
+    border-top-color: rgba(255, 255, 255, 0.05);
+}
+.input-wrapper {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    padding: 2px 4px;
+}
+body.dark .input-wrapper {
+    background: rgba(255, 255, 255, 0.08);
+}
+.input-box {
+    padding: 12px 18px;
+    font-size: 16px;
+    line-height: 1.4;
+    outline: none;
+    background: transparent;
+    border: none;
+    width: 100%;
+    max-height: 100px;
+    overflow-y: auto;
+    color: #1a1a2e;
+}
+body.dark .input-box {
+    color: #e0e0e0;
+}
+.input-box:empty:before {
+    content: attr(placeholder);
+    color: #aaa;
+}
+.voice-btn, .clear-btn {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 44px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+body.dark .voice-btn, body.dark .clear-btn {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ddd;
+}
+.voice-btn:active, .clear-btn:active {
+    transform: scale(0.94);
+    background: rgba(255, 255, 255, 0.8);
+}
+.send-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    padding: 0 22px;
+    height: 44px;
+    border-radius: 44px;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.send-btn:active {
+    transform: scale(0.96);
+    opacity: 0.9;
+}
+
+/* 提示框 */
+.toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(20px);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 40px;
+    font-size: 13px;
+    z-index: 1000;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* 滚动条美化 */
+.chat-container::-webkit-scrollbar {
+    width: 4px;
+}
+.chat-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.chat-container::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+/* 数学公式美化 */
+.bubble code {
+    background: rgba(0,0,0,0.06);
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 13px;
+}
+body.dark .bubble code {
+    background: rgba(255,255,255,0.1);
+}
+.bubble pre {
+    background: rgba(0,0,0,0.04);
+    padding: 12px;
+    border-radius: 16px;
+    overflow-x: auto;
+    margin: 8px 0;
+}
+body.dark .bubble pre {
+    background: rgba(255,255,255,0.05);
+}
+.bubble blockquote {
+    border-left: 3px solid #764ba2;
+    margin: 8px 0;
+    padding-left: 12px;
+    opacity: 0.8;
+}
+.bubble strong {
+    color: #667eea;
+}
+body.dark .bubble strong {
+    color: #8b74f0;
+}

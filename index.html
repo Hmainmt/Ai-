@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>AI聚合助手</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="status-bar"></div>
+
+<div class="header">
+    <div class="header-title">
+        <h1>AI 助手</h1>
+        <p id="modelName">DeepSeek</p>
+    </div>
+    <div class="header-actions">
+        <button class="icon-btn" id="aboutBtn">ℹ️</button>
+        <button class="icon-btn" id="historyBtn">📋</button>
+        <button class="icon-btn" id="darkModeBtn">🌙</button>
+    </div>
+</div>
+
+<div class="model-switch">
+    <button class="model-option" data-model="deepseek">DeepSeek</button>
+    <button class="model-option" data-model="zhipu">智谱GLM</button>
+</div>
+
+<div class="chat-container" id="chatContainer">
+    <div class="welcome">
+        <div class="welcome-icon">🤖</div>
+        <div class="welcome-text">你好！我是AI助手</div>
+        <div class="welcome-desc">支持 DeepSeek 和 智谱GLM<br>点击下方麦克风可以语音输入</div>
+    </div>
+</div>
+
+<div class="input-bar">
+    <button class="voice-btn" id="voiceBtn">🎤</button>
+    <div class="input-wrapper">
+        <div class="input-box" contenteditable="true" id="inputBox" placeholder="输入消息..."></div>
+    </div>
+    <button class="clear-btn" id="clearBtn">🗑️</button>
+    <button class="send-btn" id="sendBtn">发送</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
